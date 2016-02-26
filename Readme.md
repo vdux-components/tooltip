@@ -30,6 +30,7 @@ function render () {
   * `message` - The content of the tooltip. This may be just a string or it may be JSX elements.
   * `placement` - Defaults to `left`. One of `top/right/bottom/left`. Specifies where the tooltip should appear relative to the container.
   * `delay` - Optional. Defaults to 0. How long to wait before showing the tooltip after the user hovers over `children`.
+  * `space` - Optional. Defaults to 0. Add extra padding away from the element when the tooltip is positioned.
   * `class` - A class to apply to the tooltip's container when it renders.
   * `style` - Style properties you want to apply to the outermost container.
 

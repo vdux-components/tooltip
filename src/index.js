@@ -12,7 +12,7 @@ import Delay from 'vdux-delay'
  */
 
 function render ({path, props, children}) {
-  const {message, delay = 0, placement = 'top', style = {}} = props
+  const {message, delay = 0, placement = 'top', style = {}, space = 0} = props
 
   return (
     <span id={path}>
@@ -21,7 +21,7 @@ function render ({path, props, children}) {
         {
           hover => hover && (
             <Delay time={delay}>
-              <Position placement={placement} near={path}>
+              <Position placement={placement} near={path} space={space}>
                 <div class={props.class} style={{...defaultStyle, ...style}}>
                   {message}
                 </div>
