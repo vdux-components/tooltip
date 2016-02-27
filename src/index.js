@@ -2,6 +2,7 @@
  * Imports
  */
 
+import Transition from 'vdux-transition'
 import Position from 'vdux-position'
 import element from 'vdux/element'
 import Hover from 'vdux-hover'
@@ -19,19 +20,46 @@ function render ({path, props, children}) {
       <Hover>
         {children}
         {
-          hover => hover && (
-            <Delay time={delay}>
-              <Position placement={placement} near={path} space={space}>
-                <div class={props.class} style={{...defaultStyle, ...style}}>
-                  {message}
-                </div>
-              </Position>
-            </Delay>
+          hover => (
+            <Transition>
+              {
+                hover && <InnerTooltip {...props} key='tooltip' near={path}>{message}</InnerTooltip>
+              }
+            </Transition>
           )
         }
       </Hover>
     </span>
   )
+}
+
+const InnerTooltip = {
+  render ({props, children}) {
+    const {delay, placement, near, space, style} = props
+    const {entering, leaving, didEnter, didLeave} = props.transition
+
+    console.log('tooltip', props.transition)
+
+    return (
+      <Delay time={delay}>
+        <Position placement={placement} near={near} space={space}>
+          <div class={[props.class, {entering, leaving}]} style={{...defaultStyle, ...style}}>
+            <Delay time={3000} onEnd={didEnter} />
+            {children}
+            {entering && 'ENTERING!!'}
+            {
+              leaving && (
+                <span>
+                  LEAVING!!
+                  <Delay time={3000} onEnd={didLeave} />
+                </span>
+              )
+            }
+          </div>
+        </Position>
+      </Delay>
+    )
+  }
 }
 
 /**

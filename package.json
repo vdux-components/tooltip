@@ -11,7 +11,7 @@
     "postversion": "git push && git push --tags && npm publish --access=public"
   },
   "dependencies": {
-    "vdux-delay": "^1.0.3",
+    "vdux-delay": "^1.0.5",
     "vdux-hover": "^1.0.0",
     "vdux-position": "^1.0.0"
   },
