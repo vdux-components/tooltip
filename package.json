@@ -11,22 +11,23 @@
     "postversion": "git push && git push --tags && npm publish --access=public"
   },
   "dependencies": {
+    "vdux-css-transition": "^1.2.0",
     "vdux-delay": "^1.0.5",
     "vdux-hover": "^1.0.0",
     "vdux-position": "^1.0.0"
   },
   "devDependencies": {
+    "@f/trigger-event": "^1.0.0",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
     "babel-plugin-transform-react-jsx": "^6.5.2",
     "babel-preset-es2015": "^6.1.2",
     "babel-preset-stage-2": "^6.5.0",
     "babel-tape-runner": "^2.0.1",
-    "@f/trigger-event": "^1.0.0",
     "babelify": "^7.2.0",
     "hihat": "^2.6.4",
     "tap-dev-tool": "^1.3.0",
     "tape": "^4.2.0",
-    "vdux": "^2.3.1"
+    "vdux": "^2.3.17"
   }
 }
