@@ -2,7 +2,7 @@
   "name": "vdux-tooltip",
   "description": "Simple tooltip component",
   "repository": "git://github.com/vdux-components/tooltip.git",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
