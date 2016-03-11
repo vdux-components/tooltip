@@ -13,28 +13,27 @@ import trigger from '@f/trigger-event'
  */
 
 test('should work', t => {
-  const {stop} = run(() => <Tooltip class='tooltip' message={'test message'}><div id='target'>hover me</div></Tooltip>)
-
+  const stop = run(state => <Tooltip class='tooltip' message='test message'><div id='target'>hover me</div></Tooltip>)
   t.plan(1)
-  trigger($('#target'), 'mouseover')
 
   setTimeout(() => {
-    t.deepEqual($('.tooltip').innerText, 'test message')
-    t.end()
-    stop()
-  }, 100)
+    trigger($('#target'), 'mouseover')
+
+    setTimeout(() => {
+      t.deepEqual($('.tooltip').innerText, 'test message')
+      t.end()
+      stop()
+    }, 100)
+  })
 })
 
 /**
  * Helpers
  */
 
-function run (app, initialState = {}) {
-  return vdux({
-    app,
-    reducer: state => state,
-    initialState
-  })
+function run (app) {
+  const {subscribe, render} = vdux()
+  return subscribe(state => render(app(state)))
 }
 
 function $ (selector) {
