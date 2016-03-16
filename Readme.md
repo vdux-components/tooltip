@@ -33,6 +33,18 @@ function render () {
   * `space` - Optional. Defaults to 0. Add extra padding away from the element when the tooltip is positioned.
   * `class` - A class to apply to the tooltip's container when it renders.
   * `style` - Style properties you want to apply to the outermost container.
+  * `transition` - How long to wait (in milliseconds) for enter/leave transitions using [css-transition](https://github.com/vdux-css-transition). This is passed as the `timeout` prop to vdux-css-transition.
+
+## Animating entry/exit
+
+Using vdux-css-transition, the inner tooltip element will have:
+
+  * `enter`
+  * `enter-active`
+  * `leave`
+  * `leave-active`
+
+Classes added to it at each of these timesteps, so you can, e.g. have it fade in and out by styling these classes appropriately.
 
 ## API - children
 
