@@ -2,63 +2,57 @@
  * Imports
  */
 
-import CSSTransition from 'vdux-css-transition'
-import Position from 'vdux-position'
+import Delay from 'vdux-delay'
+import {Tooltip} from 'vdux-ui'
 import element from 'vdux/element'
-import Hover from 'vdux-hover'
+import createAction from '@f/create-action'
+import handleActions from '@f/handle-actions'
 
 /**
- * Tooltip
+ * Tooltip container component
  */
 
-function render ({path, props, children}) {
-  const {message, delay = 0, transition} = props
+function render ({props, state, local, children}) {
+  const {ui = Tooltip, message, delay = 0, ...otherProps} = props
+  const {hover, start} = state
+  const Tt = ui
 
   return (
-    <span id={path}>
-      <Hover delay={delay}>
-        {children}
-        {
-          hover => (
-            <CSSTransition timeout={transition}>
-              {
-                hover && <InnerTooltip {...props} key='tooltip' near={path}>{message}</InnerTooltip>
-              }
-            </CSSTransition>
-          )
-        }
-      </Hover>
+    <span onMouseEnter={local(mouseEnter)} onMouseLeave={local(mouseLeave)} style={{position: 'relative', overflow: 'visible'}}>
+      {children}
+      <Tt {...otherProps} show={hover}>
+        {message}
+      </Tt>
+      {
+        start && <Delay time={delay} onEnd={local(hoverReady)} />
+      }
     </span>
   )
 }
 
-function InnerTooltip ({props, children}) {
-  const {placement = 'top', near, space = 0, style = {}} = props
-
-  return (
-    <Position placement={placement} near={near} space={space}>
-      <div class={props.class} style={{...defaultStyle, ...style}}>
-        {children}
-      </div>
-    </Position>
-  )
-}
-
 /**
- * Style
+ * Actions
  */
 
-const defaultStyle = {
-  display: 'block',
-  zIndex: 99999,
-  pointerEvents: 'none',
-  position: 'absolute'
-}
+const mouseEnter = createAction('<Tooltip/>: Hover start')
+const hoverReady = createAction('<Tooltip/>: Hover ready')
+const mouseLeave = createAction('<Tooltip/>: Hover out')
+
+/**
+ * Reducer
+ */
+
+const reducer = handleActions({
+  [mouseEnter]: state => ({...state, start: true}),
+  [hoverReady]: state => ({...state, hover: true, start: false}),
+  [mouseLeave]: state => ({...state, hover: false, start: false})
+})
 
 /**
  * Exports
  */
 
 export default {
-  render
+  render,
+  reducer
 }

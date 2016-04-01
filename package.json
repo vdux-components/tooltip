@@ -11,11 +11,10 @@
     "postversion": "git push && git push --tags && npm publish --access=public"
   },
   "dependencies": {
-    "css-transition": "0.0.3",
-    "vdux-css-transition": "^1.2.0",
+    "@f/create-action": "^1.1.1",
+    "@f/handle-actions": "^1.1.1",
     "vdux-delay": "^1.0.5",
-    "vdux-hover": "^1.0.0",
-    "vdux-position": "^1.0.0"
+    "vdux-ui": "^1.0.15"
   },
   "devDependencies": {
     "@f/trigger-event": "^1.0.0",
