@@ -13,7 +13,6 @@
   "dependencies": {
     "@f/create-action": "^1.1.1",
     "@f/handle-actions": "^1.1.1",
-    "vdux-delay": "^1.0.5",
     "vdux-ui": "^1.0.15"
   },
   "devDependencies": {

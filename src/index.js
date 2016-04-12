@@ -2,9 +2,8 @@
  * Imports
  */
 
-import Delay from 'vdux-delay'
-import {Tooltip} from 'vdux-ui'
 import element from 'vdux/element'
+import {Tooltip, Block} from 'vdux-ui'
 import createAction from '@f/create-action'
 import handleActions from '@f/handle-actions'
 
@@ -13,20 +12,16 @@ import handleActions from '@f/handle-actions'
  */
 
 function render ({props, state, local, children}) {
-  const {ui = Tooltip, message, delay = 0, ...otherProps} = props
-  const {hover, start} = state
-  const Tt = ui
+  const {ui: Tt = Tooltip, message, ...otherProps} = props
+  const {linger} = state
 
   return (
-    <span onMouseEnter={local(mouseEnter)} onMouseLeave={local(mouseLeave)} style={{position: 'relative', overflow: 'visible'}}>
+    <Block tag='span' onLingerChange={lingerChange} relative overflow='visible'>
       {children}
-      <Tt {...otherProps} show={hover}>
+      <Tt {...otherProps} show={linger}>
         {message}
       </Tt>
-      {
-        start && <Delay time={delay} onEnd={local(hoverReady)} />
-      }
-    </span>
+    </Block>
   )
 }
 
@@ -34,18 +29,14 @@ function render ({props, state, local, children}) {
  * Actions
  */
 
-const mouseEnter = createAction('<Tooltip/>: Hover start')
-const hoverReady = createAction('<Tooltip/>: Hover ready')
-const mouseLeave = createAction('<Tooltip/>: Hover out')
+const lingerChange = createAction('<Tooltip/>: Linger change', null, () => ({logLevel: 'debug'}))
 
 /**
  * Reducer
  */
 
 const reducer = handleActions({
-  [mouseEnter]: state => ({...state, start: true}),
-  [hoverReady]: state => ({...state, hover: true, start: false}),
-  [mouseLeave]: state => ({...state, hover: false, start: false})
+  [lingerChange]: (state, linger) => ({...state, linger})
 })
 
 /**

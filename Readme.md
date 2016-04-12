@@ -11,7 +11,7 @@ Simple tooltip component
 
 ## Usage
 
-Renders your `message` as a tooltip over `children` when the user hovers over `children` for `delay|0` or more seconds.
+Renders your `message` as a tooltip over `children` when the user [lingers](https://github.com/vdux-components/css-emulator#linger-state) over `children`.
 
 ```javascript
 import Tooltip from 'vdux-tooltip'
@@ -27,12 +27,11 @@ function render () {
 
 ## API - props
 
+  * `ui` - Optional, defaults to vdux-ui's Tooltip component. This is the UI element used to render your tooltip component
   * `message` - The content of the tooltip. This may be just a string or it may be JSX elements.
   * `placement` - Defaults to `left`. One of `top/right/bottom/left`. Specifies where the tooltip should appear relative to the container.
-  * `delay` - Optional. Defaults to 0. How long to wait before showing the tooltip after the user hovers over `children`.
   * `space` - Optional. Defaults to 0. Add extra padding away from the element when the tooltip is positioned.
-  * `class` - A class to apply to the tooltip's container when it renders.
-  * `style` - Style properties you want to apply to the outermost container.
+  * `...rest` - Any other props will be forwarded to the tooltip UI component.
 
 ## API - children
 
