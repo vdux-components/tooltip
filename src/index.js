@@ -16,7 +16,7 @@ function render ({props, state, local, children}) {
   const {linger} = state
 
   return (
-    <Block tag='span' onLingerChange={lingerChange} relative overflow='visible'>
+    <Block tag='span' onLingerChange={local(lingerChange)} relative overflow='visible'>
       {children}
       <Tt {...otherProps} show={linger}>
         {message}
