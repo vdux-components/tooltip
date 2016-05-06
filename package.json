@@ -13,8 +13,8 @@
   "dependencies": {
     "@f/create-action": "^1.1.1",
     "@f/handle-actions": "^1.1.1",
-    "vdux-containers": "^1.0.2",
-    "vdux-ui": "^1.0.15"
+    "vdux-containers": "^1.1.0",
+    "vdux-ui": "^1.2.0"
   },
   "devDependencies": {
     "@f/trigger-event": "^1.0.0",
