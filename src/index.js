@@ -2,23 +2,23 @@
  * Imports
  */
 
-import element from 'vdux/element'
-import {Tooltip, Block} from 'vdux-ui'
-import createAction from '@f/create-action'
+import {wrap, CSSContainer} from 'vdux-containers'
 import handleActions from '@f/handle-actions'
+import createAction from '@f/create-action'
+import {Tooltip, Block} from 'vdux-ui'
+import element from 'vdux/element'
 
 /**
  * Tooltip container component
  */
 
-function render ({props, state, local, children}) {
-  const {ui: Tt = Tooltip, message, ...otherProps} = props
-  const {linger} = state
+function render ({props, children}) {
+  const {ui: Tt = Tooltip, message, show, ...otherProps} = props
 
   return (
-    <Block tag='span' onLingerChange={local(lingerChange)} relative overflow='visible'>
+    <Block tag='span' relative overflow='visible'>
       {children}
-      <Tt {...otherProps} show={linger}>
+      <Tt {...otherProps} show={show}>
         {message}
       </Tt>
     </Block>
@@ -26,24 +26,13 @@ function render ({props, state, local, children}) {
 }
 
 /**
- * Actions
- */
-
-const lingerChange = createAction('<Tooltip/>: Linger change', null, () => ({logLevel: 'debug'}))
-
-/**
- * Reducer
- */
-
-const reducer = handleActions({
-  [lingerChange]: (state, linger) => ({...state, linger})
-})
-
-/**
  * Exports
  */
 
-export default {
-  render,
-  reducer
-}
+export default wrap(CSSContainer, {
+  lingerProps: {
+    show: true
+  }
+})({
+  render
+})
