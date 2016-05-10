@@ -5,7 +5,7 @@
 import {wrap, CSSContainer} from 'vdux-containers'
 import handleActions from '@f/handle-actions'
 import createAction from '@f/create-action'
-import {Tooltip, Block} from 'vdux-ui'
+import {Tooltip, Base} from 'vdux-ui'
 import element from 'vdux/element'
 
 /**
@@ -13,15 +13,15 @@ import element from 'vdux/element'
  */
 
 function render ({props, children}) {
-  const {ui: Tt = Tooltip, message, show, ...otherProps} = props
+  const {ui: Tt = Tooltip, message, show, placement, space, tooltipProps = {}, ...otherProps} = props
 
   return (
-    <Block tag='span' relative overflow='visible'>
+    <Base relative overflow='visible' {...otherProps}>
       {children}
-      <Tt {...otherProps} show={show}>
+      <Tt placement={placement} space={space} show={show} {...tooltipProps}>
         {message}
       </Tt>
-    </Block>
+    </Base>
   )
 }
 
